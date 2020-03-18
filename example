@@ -1,0 +1,87 @@
+public void clear() {
+        jName.setText(null);
+        jContact.setText(null);
+        jEmail.setText(null);
+        buttonGroup1.clearSelection();
+        jJ2ee.setSelected(false);
+        jGave.setSelected(false);
+        jPhp.setSelected(false);
+        jC_sharp.setSelected(false);
+        jRemark.setText(null);
+        jLocation.setSelectedItem(0);
+
+    }
+
+    public boolean validEmail(String email) {
+        int one = email.indexOf("@");
+        int two = email.lastIndexOf(".");
+        boolean status = false;
+        if (one > 0 && two < email.length() - 1 && one < two - 1) {
+            status = true;
+
+        }
+        return status;
+
+    }
+    private void jSubmitActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        String name = jName.getText().trim();
+        String contact = jContact.getText().trim();
+        String email = jEmail.getText().trim();
+        String gender = null;
+        if (jMale.isSelected()) {
+            gender = jMale.getText().trim();
+        }
+        if (jFemale.isSelected()) {
+            gender = jFemale.getText().trim();
+        }
+        StringBuilder course = new StringBuilder();
+        if (jJ2ee.isSelected()) {
+            course.append(jJ2ee.getText().trim());
+        }
+        if (jGave.isSelected()) {
+            course.append(jJ2ee.getText().trim());
+        }
+        if (jPhp.isSelected()) {
+            course.append(jPhp.getText().trim());
+        }
+        if (jC_sharp.isSelected()) {
+            course.append(jC_sharp.getText().trim());
+        }
+        String remark = jRemark.getText().trim();
+        String location = jLocation.getSelectedItem().toString();
+        String courses = course.toString();
+
+//////////////validation
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Email filled first ");
+        } else if (email.length() < 8) {
+            JOptionPane.showMessageDialog(rootPane, "Email 8 letters ");
+        } else if (!validEmail(email)) {
+            JOptionPane.showMessageDialog(rootPane, "Email Not Valid ");
+        } else {
+            Student student = new Student(name, contact, email, gender, courses, remark, location);
+            DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+            Object row[] = new Object[7];
+            row[0] = student.getName();
+            row[1] = student.getContact();
+            row[2] = student.getEmail();
+            row[3] = student.getGender();
+            row[4] = student.getCourse();
+            row[5] = student.getRemark();
+            row[6] = student.getLocation();
+            model.addRow(row);
+            Utils.writeTofile("mizan", student);
+            clear();
+        }
+
+    }                                       
+
+    private void jClearActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        model.setRowCount(0);
+    }                                      
+
+    private void jReadFileActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        DefaultTableModel m = (DefaultTableModel) jTable.getModel();
+        Utils.displayData("mizan", m);
+    }                                        
