@@ -1,0 +1,35 @@
+public static void writeTofile (String filename, Student s){
+File deshFile = new File (filename +".txt");
+    try {
+        if (deshFile.exists()==false){
+            System.out.println("We had to make");
+            deshFile.createNewFile(); 
+                    
+        }
+        PrintWriter out = new PrintWriter(new FileWriter(deshFile, true)); 
+        out.append(s.getName()+", "+s.getContact()+", "+s.getEmail()+", "+s.getGender()+", "+s.getCourse()+", "+s.getRemark()+", "+s.getLocation()+"\n" ); 
+        out.close();
+    } catch (Exception e) {
+        System.out.println("Could not log!");
+    }
+
+
+}
+public static void displayData(String filename, 
+        DefaultTableModel model){
+    String line; 
+    BufferedReader reader;
+    
+    try {
+        reader = new BufferedReader(new FileReader(filename+".txt")); 
+        while ((line=reader.readLine())!=null){
+        model.addRow(line.split(", "));
+        }
+        reader.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, " Buffered issue!");
+    }
+            
+
+
+}
