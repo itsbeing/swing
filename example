@@ -1,16 +1,4 @@
-public void clear() {
-        jName.setText(null);
-        jContact.setText(null);
-        jEmail.setText(null);
-        buttonGroup1.clearSelection();
-        jJ2ee.setSelected(false);
-        jGave.setSelected(false);
-        jPhp.setSelected(false);
-        jC_sharp.setSelected(false);
-        jRemark.setText(null);
-        jLocation.setSelectedItem(0);
 
-    }
 
     public boolean validEmail(String email) {
         int one = email.indexOf("@");
@@ -51,14 +39,7 @@ public void clear() {
         String location = jLocation.getSelectedItem().toString();
         String courses = course.toString();
 
-//////////////validation
-        if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Email filled first ");
-        } else if (email.length() < 8) {
-            JOptionPane.showMessageDialog(rootPane, "Email 8 letters ");
-        } else if (!validEmail(email)) {
-            JOptionPane.showMessageDialog(rootPane, "Email Not Valid ");
-        } else {
+
             Student student = new Student(name, contact, email, gender, courses, remark, location);
             DefaultTableModel model = (DefaultTableModel) jTable.getModel();
             Object row[] = new Object[7];
@@ -71,8 +52,8 @@ public void clear() {
             row[6] = student.getLocation();
             model.addRow(row);
             Utils.writeTofile("mizan", student);
-            clear();
-        }
+          
+        
 
     }                                       
 
