@@ -1,0 +1,23 @@
+String email = jText.getText().trim();
+        if (email.isEmpty()) {
+            jMsg.setText("Please Enter");
+        } else if (email.length() < 8) {
+            jMsg.setText("Please Enter 8 ");
+        } else if (!validEmail(email)) {
+            jMsg.setText("Please Valid");
+        } else {
+            jMsg.setText("Please Coorect ");
+        }
+
+
+    }                                       
+    public boolean validEmail(String email) {
+        boolean status = false;
+        int one = email.indexOf("@");
+        int two = email.lastIndexOf(".");
+        if (one > 0 && two < email.length() - 1 && one < two - 1) {
+            status = true;
+
+        }
+        return status;
+    }
