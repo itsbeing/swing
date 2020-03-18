@@ -15,7 +15,7 @@ String email = jText.getText().trim();
         boolean status = false;
         int one = email.indexOf("@");
         int two = email.lastIndexOf(".");
-        if (one > 0 && two < email.length() - 1 && one < two - 1) {
+        if (one > 0 && two < email.length() - 1 && one < two - 2) {
             status = true;
 
         }
