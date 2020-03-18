@@ -1,16 +1,6 @@
 
 
-    public boolean validEmail(String email) {
-        int one = email.indexOf("@");
-        int two = email.lastIndexOf(".");
-        boolean status = false;
-        if (one > 0 && two < email.length() - 1 && one < two - 1) {
-            status = true;
-
-        }
-        return status;
-
-    }
+   
     private void jSubmitActionPerformed(java.awt.event.ActionEvent evt) {                                        
         String name = jName.getText().trim();
         String contact = jContact.getText().trim();
